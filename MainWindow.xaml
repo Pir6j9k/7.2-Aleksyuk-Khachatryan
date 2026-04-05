@@ -8,30 +8,30 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center">
             <TextBlock Text="1. Исходный текст: " FontSize="24" FontWeight="Bold" Margin="5" Foreground="DarkBlue" TextWrapping="Wrap"/>
-            <Border BorderBrush="DarkOrange" BorderThickness="1" CornerRadius="5" Margin="5" Padding="5" Width="555">
-                <TextBox x:Name="InputTextBox" FontSize="16"  Grid.Row="1" Foreground="DarkBlue" TextWrapping="Wrap" ToolTip="Введите текст для шифрования" BorderThickness="0"/>
+            <Border BorderBrush="DarkOrange" BorderThickness="1" CornerRadius="5" Margin="5" Padding="5" Width="555" Height="55">
+                <TextBox x:Name="InputTextBox" FontSize="16"  Grid.Row="1" Foreground="DarkBlue" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" ToolTip="Введите текст для шифрования" BorderThickness="0"/>
             </Border>
         </StackPanel>
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center">
             <TextBlock Text="2. Зашифрованный текст (Числа):" FontSize="24" FontWeight="Bold" Margin="5" Foreground="DarkBlue"/>
-            <Border BorderBrush="DarkOrange" BorderThickness="1" CornerRadius="5" Margin="5" Padding="5" Width="555">
-                <TextBox x:Name="CipherTextBox" FontSize="16" Foreground="DarkBlue" AcceptsReturn="True" TextWrapping="Wrap" ToolTip="Здесь появятся числа после шифрования" IsReadOnly="True" BorderThickness="0"/>
+            <Border BorderBrush="DarkOrange" BorderThickness="1" CornerRadius="5" Margin="5" Padding="5" Width="555" Height="55">
+                <TextBox x:Name="CipherTextBox" FontSize="16" Foreground="DarkBlue" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap" ToolTip="Здесь появятся числа после шифрования" IsReadOnly="True" BorderThickness="0"/>
             </Border>
         </StackPanel>
 
         <StackPanel Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center">
             <TextBlock Text="3. Расшифрованный текст (После дешифровки):" FontSize="24" FontWeight="Bold" Margin="5" Foreground="DarkBlue"/>
-            <Border BorderBrush="DarkOrange" BorderThickness="1" CornerRadius="5" Margin="5" Padding="5" Width="555" HorizontalAlignment="Left">
-                <TextBox x:Name="DecryptedTextBox" FontSize="16" Foreground="DarkBlue"  AcceptsReturn="True" TextWrapping="Wrap" ToolTip="Здесь появится восстановленный текст" IsReadOnly="True" BorderThickness="0"/>
+            <Border BorderBrush="DarkOrange" BorderThickness="1" CornerRadius="5" Margin="5" Padding="5" Width="555" Height="55" HorizontalAlignment="Left">
+                <TextBox x:Name="DecryptedTextBox" FontSize="16" Foreground="DarkBlue" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap" ToolTip="Здесь появится восстановленный текст" IsReadOnly="True" BorderThickness="0"/>
             </Border>
         </StackPanel>
 
