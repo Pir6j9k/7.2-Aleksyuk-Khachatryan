@@ -1,0 +1,24 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Пользователь" as User
+
+rectangle "Приложение RSA Шифрования" {
+  usecase "Генерация ключей (RSA)" as UC1
+  usecase "Шифрование текста/чисел" as UC2
+  usecase "Дешифрование текста/чисел" as UC3
+  usecase "Валидация входных данных" as UC4
+  usecase "Просмотр подсказок" as UC5
+}
+
+User --> UC1
+User --> UC2
+User --> UC3
+User --> UC5
+
+UC2 ..> UC4 : <<include>>
+UC3 ..> UC4 : <<include>>
+
+
+@enduml
