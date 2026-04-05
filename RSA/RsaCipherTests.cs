@@ -103,5 +103,15 @@ namespace RSA
 
             RSACipher.Encrypt(null, keys.PublicKey, keys.N);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(FormatException))]
+        public void TestRSA_InvalidCipherFormat_ShouldThrowException()
+        {
+            var keys = RSACipher.GenerateKeys();
+            string invalidCipherText = "NotANumberData"; 
+
+            RSACipher.Decrypt(invalidCipherText, keys.PrivateKey, keys.N);
+        }
     }
 }
