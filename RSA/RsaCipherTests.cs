@@ -94,5 +94,14 @@ namespace RSA
             Assert.AreEqual("", encrypted, "Шифрование пустой строки должно возвращать пустую строку.");
             Assert.AreEqual("", decrypted, "Дешифрование пустой строки должно возвращать пустую строку.");
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestRSA_NullInput_ShouldThrowException()
+        {
+            var keys = RSACipher.GenerateKeys();
+
+            RSACipher.Encrypt(null, keys.PublicKey, keys.N);
+        }
     }
 }
