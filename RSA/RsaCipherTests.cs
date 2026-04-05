@@ -20,5 +20,18 @@ namespace RSA
             Assert.AreEqual(original, decrypted, "Ошибка дешифрования английского символа.");
             Assert.AreNotEqual(original, encrypted, "Зашифрованный текст совпадает с оригиналом.");
         }
+
+        [TestMethod]
+        public void TestRSA_EncryptDecrypt_RussianText()
+        {
+            var keys = RSACipher.GenerateKeys();
+            string original = "Привет";
+
+            string encrypted = RSACipher.Encrypt(original, keys.PublicKey, keys.N);
+            string decrypted = RSACipher.Decrypt(encrypted, keys.PrivateKey, keys.N);
+
+            Assert.AreEqual(original, decrypted, "Ошибка дешифрования русского текста.");
+            Assert.AreNotEqual(original, encrypted, "Зашифрованный текст совпадает с оригиналом.");
+        }
     }
 }
