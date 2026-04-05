@@ -59,5 +59,18 @@ namespace RSA
             Assert.AreEqual(original, decrypted, "Ошибка дешифрования текста с пробелами и переносами.");
             Assert.AreNotEqual(original, encrypted, "Зашифрованный текст совпадает с оригиналом.");
         }
+
+        [TestMethod]
+        public void TestRSA_KeyGeneration_ShouldBeMathematicallyCorrect()
+        {
+            var keys = RSACipher.GenerateKeys();
+
+            BigInteger phi = (keys.P - 1) * (keys.Q - 1);
+            BigInteger check = (keys.PublicKey * keys.PrivateKey) % phi;
+
+            Assert.AreEqual(BigInteger.One, check, "Математическая связь ключей e и d нарушена.");
+            Assert.IsTrue(IsPrime(keys.P), "Число P не является простым.");
+            Assert.IsTrue(IsPrime(keys.Q), "Число Q не является простым.");
+        }
     }
 }
