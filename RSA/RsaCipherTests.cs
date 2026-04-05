@@ -72,5 +72,27 @@ namespace RSA
             Assert.IsTrue(IsPrime(keys.P), "Число P не является простым.");
             Assert.IsTrue(IsPrime(keys.Q), "Число Q не является простым.");
         }
+        private bool IsPrime(BigInteger n)
+        {
+            if (n < 2) return false;
+            if (n == 2 || n == 3) return true;
+            if (n % 2 == 0) return false;
+            for (BigInteger i = 3; i * i <= n; i += 2)
+                if (n % i == 0) return false;
+            return true;
+        }
+
+        [TestMethod]
+        public void TestRSA_EmptyInput_ShouldReturnEmptyString()
+        {
+            var keys = RSACipher.GenerateKeys();
+            string input = "";
+
+            string encrypted = RSACipher.Encrypt(input, keys.PublicKey, keys.N);
+            string decrypted = RSACipher.Decrypt(encrypted, keys.PrivateKey, keys.N);
+
+            Assert.AreEqual("", encrypted, "Шифрование пустой строки должно возвращать пустую строку.");
+            Assert.AreEqual("", decrypted, "Дешифрование пустой строки должно возвращать пустую строку.");
+        }
     }
 }
