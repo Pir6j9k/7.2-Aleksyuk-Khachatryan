@@ -10,6 +10,7 @@ namespace _7._2_Aleksyuk_Khachatryan
     public class RSACipher
     {
 
+        private static readonly Random _random = new Random();
         public class RSAKeys
         {
             public BigInteger P { get; set; }
@@ -20,16 +21,26 @@ namespace _7._2_Aleksyuk_Khachatryan
         }
 
         /// <summary>
-        /// Генерирует пару ключей на основе простых чисел.
+        /// Генерирует пару случайных ключей.
         /// </summary>
         /// <returns>Объект с открытым и закрытым ключами.</returns>
         public static RSAKeys GenerateKeys()
         {
-            BigInteger p = 101;
-            BigInteger q = 103;
+            BigInteger p = GenerateRandomPrime(300, 2000);
+            BigInteger q;
+            do
+            {
+                q = GenerateRandomPrime(300, 2000);
+            } while (p == q); 
+
             BigInteger n = p * q;
             BigInteger phi = (p - 1) * (q - 1);
-            BigInteger e = 7; 
+
+            BigInteger e;
+            do
+            {
+                e = _random.Next(2, (int)BigInteger.Min(phi - 1, 100000));
+            } while (GCD(e, phi) != 1); 
 
             BigInteger d = ModInverse(e, phi);
 
@@ -89,6 +100,59 @@ namespace _7._2_Aleksyuk_Khachatryan
             }
         }
 
+        /// <summary>
+        /// Генерирует случайное простое число в заданном диапазоне.
+        /// </summary>
+        private static BigInteger GenerateRandomPrime(int min, int max)
+        {
+            while (true)
+            {
+                int num = _random.Next(min, max);
+                if (IsPrime(num)) return num;
+            }
+        }
+
+        /// <summary>
+        /// Проверяет, является ли число простым.
+        /// </summary>
+        /// <param name="n">Число типа BigInteger для проверки на простоту.</param>
+        /// <returns>Возвращает true, если число является простым; иначе — false.</returns>
+        public static bool IsPrime(BigInteger n)
+        {
+            if (n < 2) return false;
+            if (n == 2 || n == 3) return true;
+            if (n % 2 == 0) return false;
+            for (BigInteger i = 3; i * i <= n; i += 2)
+                if (n % i == 0) return false;
+            return true;
+        }
+
+        /// <summary>
+        /// Вычисляет наибольший общий делитель (НОД) двух чисел по классическому алгоритму Евклида.
+        /// </summary>
+        /// <param name="a">Первое целое число (обычно экспонента e).</param>
+        /// <param name="b">Второе целое число (обычно значение функции Эйлера phi).</param>
+        /// <returns>Наибольший общий делитель переданных чисел. Если результат равен 1, числа взаимно просты.</returns>
+        private static BigInteger GCD(BigInteger a, BigInteger b)
+        {
+            while (b != 0)
+            {
+                BigInteger temp = b;
+                b = a % b;
+                a = temp;
+            }
+            return a;
+        }
+
+        /// <summary>
+        /// Вычисляет модульное обратное число для 'a' по модулю 'n' с использованием расширенного алгоритма Евклида.
+        /// </summary>
+        /// <param name="a">Число, для которого ищется обратное (обычно открытая экспонента e).</param>
+        /// <param name="n">Модуль, по которому производится вычисление (обычно функция Эйлера phi).</param>
+        /// <returns>
+        /// Возвращает значение d, такое что (a * d) % n == 1. 
+        /// Если обратного числа не существует (НОД != 1), возвращает -1.
+        /// </returns>
         private static BigInteger ModInverse(BigInteger a, BigInteger n)
         {
             BigInteger t = 0, nt = 1, r = n, nr = a;
