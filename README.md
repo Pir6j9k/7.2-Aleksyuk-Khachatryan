@@ -23,3 +23,5 @@ RSA (Rivest–Shamir–Adleman) — криптосистема с открыты
 
 ## 4. Диаграмма вариантов использования (Use Case Diagram)
 Диаграмма визуализирует основные функции приложения для пользователя.
+<img width="793" height="363" alt="image" src="https://github.com/user-attachments/assets/e4f261ef-e080-4295-81cc-8c2f54715d2d" />
+
