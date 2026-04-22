@@ -12,10 +12,10 @@ rectangle "Приложение RSA Шифрования" {
   usecase "Просмотр подсказок" as UC5
 }
 
-User --> UC1
-User --> UC2
-User --> UC3
-User --> UC5
+User -- UC1
+User -- UC2
+User -- UC3
+User -- UC5
 
 UC2 ..> UC4 : <<include>>
 UC3 ..> UC4 : <<include>>
